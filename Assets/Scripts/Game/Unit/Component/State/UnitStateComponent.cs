@@ -7,12 +7,12 @@ using Framework;
 
 namespace Game
 {
-	/// <summary>
-	/// 管理unit的状态以及状态机
-	/// </summary>
+    
+    /// <summary>
+    /// 管理unit的状态以及状态机
+    /// </summary>
     public class UnitStateComponent : UnitComponentBase
     {
-		
         public int PropState { get { return this._unit.PropComponent.PropState; } }
 
 		protected UnitFSMStateMachine _stateMachine;
@@ -34,6 +34,11 @@ namespace Game
 			this._unit.PropComponent.InitProperty(UnitProperty.State, 0);
 			_stateMachine = new UnitFSMStateMachine (_unit);
 			_stateMachine.InitState (UnitFSMStateName.Float_Free);
+        }
+
+        public void AcceptInput(FSMStateInputType inputType,params object[] param)
+        {
+            _stateMachine.AcceptInput(inputType, param);
         }
 
         public override void Update(float dt)

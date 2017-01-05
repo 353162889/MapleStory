@@ -3,7 +3,13 @@ using Framework;
 
 namespace Game
 {
-	public enum UnitFSMConditionType
+    public enum FSMStateInputType
+    {
+        Move,
+        Action
+    }
+
+    public enum UnitFSMConditionType
 	{
 		GroundCheck = 0,		//是否在地面的检测
 	}
@@ -69,6 +75,14 @@ namespace Game
 		{
 			return new UnitFSMConditionParam (type,param);
 		}
+
+        public void AcceptInput(FSMStateInputType type,object[] param)
+        {
+            if(_machine != null && _machine.CurrentState != null)
+            {
+                ((UnitFSMStateBase)_machine.CurrentState).AcceptInput(type, param);
+            }
+        }
 
 		public void OnTick(float dt)
 		{

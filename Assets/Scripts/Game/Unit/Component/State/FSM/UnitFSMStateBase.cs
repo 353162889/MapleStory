@@ -3,6 +3,7 @@ using Framework;
 
 namespace Game
 {
+   
 	public class UnitFSMStateBase : FiniteState
 	{
 		protected UnitBase _unit;
@@ -12,7 +13,19 @@ namespace Game
 			this._unit = unit;
 		}
 
-		protected override void OnEnter ()
+        public void AcceptInput(FSMStateInputType type,object[] param)
+        {
+            if(IsInState)
+            {
+                OnInput(type, param);
+            }
+        }
+
+        protected virtual void OnInput(FSMStateInputType inputType, object[] param)
+        {
+        }
+
+        protected override void OnEnter ()
 		{
 			int beforeState = _unit.PropComponent.PropState;
 			int afterState = UnitFSMStateName.GetPropState (this.StateName);

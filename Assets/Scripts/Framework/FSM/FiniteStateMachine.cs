@@ -19,6 +19,7 @@ namespace Framework
 		private bool _isPause;
 		private bool _isTransition;
 		private FiniteState _currentState;
+        public FiniteState CurrentState { get { return _currentState; } }
 		private FiniteState _toState;
 
 		public FiniteStateMachine()

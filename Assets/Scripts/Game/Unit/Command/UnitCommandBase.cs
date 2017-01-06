@@ -26,6 +26,7 @@ namespace Game
 		{
 			_unit = null;
 			ExeType = UnitCommandExecuteType.Immediately;
+			base.Reset ();
 		}
 	}
 }

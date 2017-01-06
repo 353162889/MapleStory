@@ -9,7 +9,8 @@ namespace Game
     public abstract class GameInputBase
     {
         public event Action<Vector2> OnInputMove;
-        public event Action<VirtualKey> OnKeyClick;
+        public event Action<VirtualKey> OnKeyDown;
+		public event Action<VirtualKey> OnKeyUp;
         private List<GameInputForbidKey> _listForbid;
 
         public virtual void Init()
@@ -25,13 +26,21 @@ namespace Game
             }
         }
 
-        protected void OnClick(VirtualKey key)
+        protected void OnClickKeyDown(VirtualKey key)
         {
-            if(OnKeyClick != null && _listForbid.Count == 0)
+            if(OnKeyDown != null && _listForbid.Count == 0)
             {
-                OnKeyClick.Invoke(key);
+                OnKeyDown.Invoke(key);
             }
         }
+
+		protected void OnClickKeyUp(VirtualKey key)
+		{
+			if(OnKeyUp != null && _listForbid.Count == 0)
+			{
+				OnKeyUp.Invoke(key);
+			}
+		}
 
         public void ForbidInput(GameInputForbidKey key)
         {

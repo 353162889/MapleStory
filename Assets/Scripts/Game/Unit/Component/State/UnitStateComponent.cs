@@ -36,11 +36,6 @@ namespace Game
 			_stateMachine.InitState (UnitFSMStateName.Float_Free);
         }
 
-        public void AcceptInput(FSMStateInputType inputType,params object[] param)
-        {
-            _stateMachine.AcceptInput(inputType, param);
-        }
-
         public override void Update(float dt)
         {
 			if (_stateMachine != null)

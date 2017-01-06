@@ -6,7 +6,11 @@ namespace Game
 	{
 		PlayAnim,
 		PlayFace,
-		Gravity
+		Gravity,
+		ChangeFace,
+		MoveDirection,
+		Jump,
+		Input
 	}
 }
 

@@ -20,6 +20,7 @@ namespace Game
             _componentContainer.RegisterComponent(new UnitStateComponent(this));
             _componentContainer.RegisterComponent(new UnitMoverComponent(this));
             _componentContainer.RegisterComponent (new UnitPlayerAnimatorComponent (this));
+			_componentContainer.RegisterComponent (new UnitInputComponent (this));
 		}
 
 		protected override void InitFinish ()

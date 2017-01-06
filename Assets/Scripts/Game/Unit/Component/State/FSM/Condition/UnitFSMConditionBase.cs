@@ -29,7 +29,7 @@ namespace Game
 
 		public virtual void Dispose()
 		{
-			_unit = null;
+			this._unit = null;
 			_param = null;
 		}
 	}

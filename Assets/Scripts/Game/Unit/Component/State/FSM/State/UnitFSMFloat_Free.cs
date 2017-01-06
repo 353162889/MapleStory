@@ -5,13 +5,14 @@ namespace Game
 	public class UnitFSMFloat_Free : UnitFSMStateBase
 	{
 		public UnitFSMFloat_Free(string stateName,UnitBase unit)
-			:base(stateName, unit)
+			:base(stateName,unit)
 		{
 		}
 
 		protected override void OnEnter ()
 		{
 			base.OnEnter ();
+			DoAction (UnitActionBaseDef.Jump);
 			EnableGravity (true);
 		}
 

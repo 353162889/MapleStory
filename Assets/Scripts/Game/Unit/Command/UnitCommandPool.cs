@@ -15,7 +15,11 @@ namespace Game
 			_mapCapicity = new Dictionary<UnitCommandType, int>(new UnitCommanTypeComparer()){ 
 				{UnitCommandType.PlayAnim,5},
 				{UnitCommandType.PlayFace,5},
-				{UnitCommandType.Gravity,1}
+				{UnitCommandType.Gravity,5},
+				{UnitCommandType.ChangeFace,5},
+				{UnitCommandType.MoveDirection,5},
+				{UnitCommandType.Jump,5},
+				{UnitCommandType.Input,5},
 			};
 		}
 

@@ -35,6 +35,12 @@ namespace Game
 			}
 
 		}
+
+		public override void Reset ()
+		{
+			_enableGravity = false;
+			base.Reset ();
+		}
 	}
 }
 

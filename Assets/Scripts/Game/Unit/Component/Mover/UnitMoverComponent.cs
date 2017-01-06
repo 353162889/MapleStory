@@ -16,12 +16,12 @@ namespace Game
         //默认最大的上升或下降速度大小
         private static float DefaultMaxVerticalSpeed = 6f;
         //默认重力加速度
-        private static float DefaultGravity = 2.98f;
+        private static float DefaultGravity = 4.98f;
 
-        private static float DefaultJumpSpeed = 3f;
+        private static float DefaultJumpSpeed = 4f;
 
-		//人物检测高度数据时的偏移高度（人物中心点的高度加上当前偏移高度才是检测高度）
-		private static float OffsetOnGround = 0.3f;
+//		//人物检测高度数据时的偏移高度（人物中心点的高度加上当前偏移高度才是检测高度）
+//		private static float OffsetOnGround = 0.3f;
 
         protected float _horizontalSpeed;
         protected float _verticalSpeed;
@@ -126,12 +126,13 @@ namespace Game
 					_unit.PropComponent.UpdateProperty (UnitProperty.Speed, speed);
 				}
 				int propState = _unit.PropComponent.PropState;
-				bool isGround = UnitStateValue.HasState (propState, UnitStateEnum.Ground);
-				//如果是Ground状态，高度设置成当前地图的高度
-				if (isGround)
-				{
-					curPos.y = SceneModel.Instance.GetCurMapHeight (curPos.x, curPos.y + OffsetOnGround);
-				}
+//				//这个时候状态还来不及改变（将人物直接设置到高度后，检测的时候又变成isGround状态了）
+//				bool isGround = UnitStateValue.HasState (propState, UnitStateEnum.Ground);
+				//如果是Ground，高度设置成当前地图的高度
+//				if (false)
+//				{
+//					curPos.y = SceneModel.Instance.GetCurMapHeight (curPos.x, curPos.y + OffsetOnGround);
+//				}
 
 				//如果下一个位置已经超出了人物可行走的场景位置，那么人物只在场景边缘
 				curPos.x = SceneModel.Instance.GetX (curPos.x);

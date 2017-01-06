@@ -14,8 +14,8 @@ namespace Game
 
 		public override void InitParam (object[] param)
 		{
-			_isGround = (bool)param [0];
 			base.InitParam (param);
+			_isGround = (bool)param [0];
 		}
 
 		public override bool IsInCondition (Framework.FiniteState curState, string toStateName)

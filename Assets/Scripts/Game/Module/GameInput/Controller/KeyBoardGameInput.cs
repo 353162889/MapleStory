@@ -64,21 +64,25 @@ namespace Game
             else
             {
                 VirtualKey virtualKey = mapKey[key];
-                this.OnClick(virtualKey);
+				this.OnClickKeyDown(virtualKey);
             }
         }
 
         private void OnKeyUp(KeyCode key)
         {
-            if (mapMove.ContainsKey(key))
-            {
-                if (ListMoveKey.Contains(key))
-                {
-                    ListMoveKey.Remove(key);
-                    OnDirectionChange();
-                }
-            }
-         
+			if (mapMove.ContainsKey (key))
+			{
+				if (ListMoveKey.Contains (key))
+				{
+					ListMoveKey.Remove (key);
+					OnDirectionChange ();
+				}
+			}
+			else
+			{
+				VirtualKey virtualKey = mapKey[key];
+				this.OnClickKeyUp(virtualKey);
+			}
         }
     }
 

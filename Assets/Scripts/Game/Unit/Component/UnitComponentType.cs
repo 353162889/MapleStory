@@ -8,6 +8,7 @@ namespace Game
         Mover,          //基础移动管理器
         State,          //基础状态管理器
         Property,       //基础属性管理器
+		Input,			//基础输入管理器
 	}
 }
 

@@ -6,6 +6,7 @@ namespace Game
 {
     public class SceneMapMO
     {
+		private int MaxInterpolationGridNum = 1;
         private SceneMapData _sceneMapData;
         //每个的高度数据（可能会有多个高度,也可能没有）
         private float[][] _heightData;
@@ -20,10 +21,13 @@ namespace Game
 		public float MapOriginX{get{ return _sceneMapData.OriginX;}}
 		public float MapOriginY{get{ return _sceneMapData.OriginY;}}
 
+		private float MaxInterpolationHeight;
+
 		private Mesh _mapMesh;
         public SceneMapMO(SceneMapData mapData)
         {
             this._sceneMapData = mapData;
+			MaxInterpolationHeight = _sceneMapData.WidthPerGrid * MaxInterpolationGridNum;
             int width = _sceneMapData.Map.GetLength(0);
             int height = _sceneMapData.Map.GetLength(1);
             _mapWidth = width * _sceneMapData.WidthPerGrid;
@@ -105,13 +109,28 @@ namespace Game
             int widthIndex = Mathf.FloorToInt(tempX / _sceneMapData.WidthPerGrid);
             float[] heights = _heightData[widthIndex];
             int length = heights.Length;
-            for (int i = length - 1; i >= 0; i--)
+			int i;
+            for (i = length - 1; i >= 0; i--)
             {
                 if(y > heights[i])
                 {
+//					break;
                     return heights[i];
                 }
             }
+//			if (i >= 0)
+//			{
+//				float subValue = x - Mathf.FloorToInt (x);
+//				if (subValue > 0.5f && i + 1 < _heightData.Length && Mathf.Abs(heights[i+1] - heights[i]) < MaxInterpolationHeight)
+//				{
+//					return Mathf.Lerp (heights [i], heights [i + 1], subValue - 0.5f);
+//				}
+//				else if(subValue < 0.5f && i - 1 >= 0 && Mathf.Abs(heights[i - 1] - heights[i]) < MaxInterpolationHeight)
+//				{
+//					return Mathf.Lerp (heights [i - 1], heights [i], subValue + 0.5f);
+//				}
+//				return heights[i];
+//			}
             //默认返回地图最低值，如果是脚底下没有路了
             return _sceneMapData.OriginY;
 

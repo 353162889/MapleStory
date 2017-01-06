@@ -15,6 +15,7 @@ namespace Game
         public string FaceName { get { return GetProperty<string>(UnitProperty.FaceName); } }
         public Vector2 Speed { get { return GetProperty<Vector2>(UnitProperty.Speed); } }
         public int PropState { get { return GetProperty<int>(UnitProperty.State); } }
+		public UnitFace UnitFace{get{return GetProperty<UnitFace> (UnitProperty.UnitFace);}}
 
         public override UnitComponentType ComponentType
         {

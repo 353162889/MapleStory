@@ -1,14 +1,9 @@
 ﻿using System;
 using Framework;
+using System.Collections.Generic;
 
 namespace Game
 {
-    public enum FSMStateInputType
-    {
-        Move,
-        Action
-    }
-
     public enum UnitFSMConditionType
 	{
 		GroundCheck = 0,		//是否在地面的检测
@@ -27,17 +22,18 @@ namespace Game
 
 	public class UnitFSMStateMachine
 	{
+		public UnitBase _unit{ get; private set;}
 		private FiniteStateMachine _machine;
-		private UnitBase _unit;
+
 		public UnitFSMStateMachine (UnitBase unit)
 		{
-			_unit = unit;
+			this._unit = unit;
 			_machine = new FiniteStateMachine ();
 			//添加状态
 			string[] states = UnitFSMStateName.FSMStateArr;
 			for (int i = 0; i < states.Length; i++)
 			{
-				UnitFSMStateBase fsmState = UnitFSMStateFactory.GetState (_unit, states [i]);
+				UnitFSMStateBase fsmState = UnitFSMStateFactory.GetState (_unit,states [i]);
 				_machine.AddState (fsmState);
 			}
 
@@ -76,14 +72,6 @@ namespace Game
 			return new UnitFSMConditionParam (type,param);
 		}
 
-        public void AcceptInput(FSMStateInputType type,object[] param)
-        {
-            if(_machine != null && _machine.CurrentState != null)
-            {
-                ((UnitFSMStateBase)_machine.CurrentState).AcceptInput(type, param);
-            }
-        }
-
 		public void OnTick(float dt)
 		{
 			if (_machine != null)
@@ -105,6 +93,7 @@ namespace Game
 				_machine.OnDestroy ();
 				_machine = null;
 			}
+
 			_unit = null;
 		}
 	}

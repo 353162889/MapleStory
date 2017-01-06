@@ -25,7 +25,7 @@ namespace Game
 		{
 			if (_unit != null)
 			{
-				_focusParam.Pos = _unit.transform.position + new Vector3 (0,0,-10f);
+				_focusParam.Pos = _unit.transform.position + new Vector3 (0,0,_cameraCtl.Camera.transform.position.z);
 				_focusParam.FieldOfView = _cameraCtl.Camera.fieldOfView;
 				_focusParam.Focus = _unit.transform.position;
 				_cameraCtl.SetCameraFocus (_focusParam);

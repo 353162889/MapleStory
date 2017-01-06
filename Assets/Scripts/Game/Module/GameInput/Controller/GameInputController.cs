@@ -7,7 +7,8 @@ namespace Game
 	public class GameInputController : BaseController<GameInputController>
 	{
         public event Action<Vector2> OnInputMove { add { _gameInput.OnInputMove += value; }remove { _gameInput.OnInputMove -= value; } }
-		public event Action<VirtualKey> OnKeyClick { add { _gameInput.OnKeyClick += value; }remove { _gameInput.OnKeyClick -= value; } }
+		public event Action<VirtualKey> OnKeyDown { add { _gameInput.OnKeyDown += value; }remove { _gameInput.OnKeyDown -= value; } }
+		public event Action<VirtualKey> OnKeyUp{add{_gameInput.OnKeyUp += value;}remove{_gameInput.OnKeyUp -= value;}}
         private GameInputBase _gameInput;
 
 		public override void InitController ()

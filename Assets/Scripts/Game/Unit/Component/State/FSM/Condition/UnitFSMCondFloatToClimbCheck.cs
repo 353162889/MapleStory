@@ -4,14 +4,13 @@ using System.Collections.Generic;
 
 namespace Game
 {
-	public class UnitFSMCondGroundToClimbCheck : UnitFSMConditionBase
+	public class UnitFSMCondFloatToClimbCheck : UnitFSMConditionBase
 	{
-		private static float OffsetUnderGround = -0.09f;//跟地图的每个碰撞格子的高度有关
 		private static float OffsetOnGround = 0.3f;
-		public UnitFSMCondGroundToClimbCheck (UnitBase unit)
+		public UnitFSMCondFloatToClimbCheck (UnitBase unit)
 			:base(unit)
 		{
-			
+
 		}
 
 		public override bool IsInCondition (Framework.FiniteState curState, string toStateName)
@@ -30,11 +29,6 @@ namespace Game
 						{
 							Vector3 pos = this._unit.transform.position;
 							climbable = SceneModel.Instance.IsClimbable(pos.x, pos.y + OffsetOnGround);	
-						}
-						else if (moveParam.Y < 0)
-						{
-							Vector3 pos = this._unit.transform.position;
-							climbable = SceneModel.Instance.IsClimbable(pos.x, pos.y + OffsetUnderGround);	
 						}
 						return climbable;
 					}

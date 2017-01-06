@@ -8,6 +8,11 @@ namespace Game
 			:base(stateName,unit)
 		{
 		}
+
+		protected override void OnInput (UnitInputParam inputParam)
+		{
+			base.OnInput (inputParam);
+		}
 	}
 }
 

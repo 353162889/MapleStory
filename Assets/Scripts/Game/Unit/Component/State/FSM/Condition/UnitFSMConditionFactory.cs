@@ -8,8 +8,10 @@ namespace Game
 	public class UnitFSMConditionFactory
 	{
 		private static Dictionary<UnitFSMConditionType, Type> mapCondition = new Dictionary<UnitFSMConditionType, Type> {
-			{UnitFSMConditionType.GroundCheck,typeof(UnitFSMCondGroundCheck)}
-		};
+			{UnitFSMConditionType.GroundCheck,typeof(UnitFSMCondGroundCheck)},
+            {UnitFSMConditionType.LandingCheck,typeof(UnitFSMCondLandingCheck)},
+            {UnitFSMConditionType.RiseCheck,typeof(UnitFSMCondRiseCheck)},
+        };
 
 		public static UnitFSMConditionBase GetCondition(UnitBase unit,UnitFSMConditionType conditionType,object[] param)
 		{

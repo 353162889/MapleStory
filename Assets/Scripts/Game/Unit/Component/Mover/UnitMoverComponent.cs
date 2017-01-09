@@ -16,9 +16,9 @@ namespace Game
         //默认最大的上升或下降速度大小
         private static float DefaultMaxVerticalSpeed = 6f;
         //默认重力加速度
-        private static float DefaultGravity = 4.98f;
+        private static float DefaultGravity = 9.8f;
 
-        private static float DefaultJumpSpeed = 4f;
+        private static float DefaultJumpSpeed = 5f;
 
 //		//人物检测高度数据时的偏移高度（人物中心点的高度加上当前偏移高度才是检测高度）
 //		private static float OffsetOnGround = 0.3f;
@@ -46,6 +46,9 @@ namespace Game
         public override void Init()
         {
 			this._unit.PropComponent.InitProperty(UnitProperty.Speed, new Vector2(0f,0f));
+            Vector3 pos = _unit.transform.position;
+            Vector2 lastPos = new Vector2(pos.x,pos.y);
+            this._unit.PropComponent.InitProperty(UnitProperty.LastPos, lastPos);
             this._horizontalSpeed = DefaultHorizontalSpeed;
             this._verticalSpeed = DefaultVerticalSpeed;
             this._gravity = DefaultGravity;
@@ -70,7 +73,6 @@ namespace Game
             {
 				speed.x = Mathf.Sign(x) * DefaultHorizontalSpeed;
             }
-            int propState = _unit.PropComponent.PropState;
             if (Mathf.Approximately(y, 0))
             {
 				speed.y = 0f;
@@ -79,10 +81,10 @@ namespace Game
             {
 				speed.y = Mathf.Sign(y) * DefaultVerticalSpeed;
             }
-			if (_oldSpeed.x != speed.x || _oldSpeed.y != speed.y)
-			{
-				_unit.PropComponent.UpdateProperty (UnitProperty.Speed, speed);
-			}
+            if (Mathf.Abs(_oldSpeed.x - speed.x) > 0.0001f || Mathf.Abs(_oldSpeed.y - speed.y) > 0.0001f)
+            {
+                _unit.PropComponent.UpdateProperty(UnitProperty.Speed, speed);
+            }
         }
 
         public void Jump()
@@ -95,6 +97,11 @@ namespace Game
 		public void EnableGravity(bool enable)
 		{
 			this._enableGravity = enable;
+		    if (!_enableGravity)
+		    {
+                Vector2 speed = _unit.PropComponent.Speed;
+                ChangeDirection(speed.x,0f);
+		    }
 		}
 
         public override void Update(float dt)
@@ -117,15 +124,19 @@ namespace Game
 
                 //更新当前角色的位置
                 Vector3 curPos = _unit.transform.position;
-				curPos.x = curPos.x + speed.x * dt;
+                Vector2 lastPos = _unit.PropComponent.LastPos;
+                lastPos.x = curPos.x;
+                lastPos.y = curPos.y;
+                _unit.PropComponent.UpdateProperty(UnitProperty.LastPos, lastPos);
+                curPos.x = curPos.x + speed.x * dt;
 				curPos.y = curPos.y + speed.y * dt;
 
 				//将速度更新回去
-				if (_oldSpeed.x != speed.x || _oldSpeed.y != speed.y)
+				if ( Mathf.Abs(_oldSpeed.x - speed.x) > 0.0001f || Mathf.Abs(_oldSpeed.y - speed.y) > 0.0001f)
 				{
 					_unit.PropComponent.UpdateProperty (UnitProperty.Speed, speed);
 				}
-				int propState = _unit.PropComponent.PropState;
+				//int propState = _unit.PropComponent.PropState;
 //				//这个时候状态还来不及改变（将人物直接设置到高度后，检测的时候又变成isGround状态了）
 //				bool isGround = UnitStateValue.HasState (propState, UnitStateEnum.Ground);
 				//如果是Ground，高度设置成当前地图的高度

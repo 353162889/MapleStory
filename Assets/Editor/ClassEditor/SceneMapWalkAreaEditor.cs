@@ -68,6 +68,9 @@ public class SceneMapWalkAreaEditor : Editor
 					SceneMapData mapMO = StringUtil.Deserialize<SceneMapData> (content);
 					walkArea.mapMO = mapMO;
 					walkArea.widthPerGrid = mapMO.WidthPerGrid;
+				    float width = walkArea.mapMO.Map.GetLength(0)*mapMO.WidthPerGrid;
+				    float height = walkArea.mapMO.Map.GetLength(1)*mapMO.WidthPerGrid;
+                    walkArea.gameObject.transform.localScale = new Vector3(width,height,1f);
 				}
 			}
 			if (GUILayout.Button ("保存地图数据", GUILayout.Width (80)))

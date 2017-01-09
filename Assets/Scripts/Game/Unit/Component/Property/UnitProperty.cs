@@ -16,6 +16,7 @@ namespace Game
         public static UnitProperty Speed = new UnitProperty(3, "speed");
         public static UnitProperty State = new UnitProperty(4, "state");
         public static UnitProperty UnitFace = new UnitProperty(5, "unitface");
+        public static UnitProperty LastPos = new UnitProperty(6, "lastpos");
 
         public static UnitProperty GetUnitProperty(string name)
         {

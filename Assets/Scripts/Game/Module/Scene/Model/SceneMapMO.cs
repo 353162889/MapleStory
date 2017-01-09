@@ -21,9 +21,9 @@ namespace Game
 		public float MapOriginX{get{ return _sceneMapData.OriginX;}}
 		public float MapOriginY{get{ return _sceneMapData.OriginY;}}
 
-		private float MaxInterpolationHeight;
+        public float MaxInterpolationHeight { get; private set; }
 
-		private Mesh _mapMesh;
+        private Mesh _mapMesh;
         public SceneMapMO(SceneMapData mapData)
         {
             this._sceneMapData = mapData;

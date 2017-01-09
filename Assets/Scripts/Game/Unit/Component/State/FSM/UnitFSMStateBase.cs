@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Game
 {
-   
-	public class UnitFSMStateBase : FiniteState
-	{
-		//人物检测高度数据时的偏移高度（人物中心点的高度加上当前偏移高度才是检测高度）
-		private static float OffsetOnGround = 0.3f;
 
-		protected UnitBase _unit;
+    public class UnitFSMStateBase : FiniteState
+    {
+        //人物检测高度数据时的偏移高度（人物中心点的高度加上当前偏移高度才是检测高度）
+        private static float OffsetOnGround = 0.3f;
+
+        protected UnitBase _unit;
 		public UnitFSMStateBase (string stateName,UnitBase unit)
 			:base(stateName)
 		{
@@ -48,7 +48,8 @@ namespace Game
         }
 
         protected override void OnEnter ()
-		{
+        {
+            CLog.Log("EnterState:"+this.StateName);
 			int beforeState = _unit.PropComponent.PropState;
 			int afterState = UnitFSMStateName.GetPropState (this.StateName);
 			this._unit.PropComponent.UpdateProperty (UnitProperty.State, afterState);
@@ -60,7 +61,7 @@ namespace Game
 			base.OnEnter ();
 		}
 
-		protected override void OnExit ()
+	    protected override void OnExit ()
 		{
 			this._unit.RemoveListener (UnitInputEvent.OnAcceptInput, OnAcceptInput);
 			base.OnExit ();

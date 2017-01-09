@@ -27,6 +27,8 @@ namespace Game
 		{
 			UnitPlayerAnimatorComponent component = GetUnitComponent<UnitPlayerAnimatorComponent> ();
 			component.RefreshFashions (PlayerMO.listAvatar);
+		    UnitStateComponent stateComponent = (UnitStateComponent)GetUnitComponent(UnitComponentType.State);
+            stateComponent.InitState(UnitFSMStateName.Float_Free);
 		}
 	}
 }

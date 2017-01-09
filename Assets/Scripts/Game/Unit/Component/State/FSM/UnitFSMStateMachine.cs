@@ -7,6 +7,8 @@ namespace Game
     public enum UnitFSMConditionType
 	{
 		GroundCheck = 0,		//是否在地面的检测
+        LandingCheck = 1,       //是否着陆检测
+        RiseCheck = 2,          //是否上升检测
 	}
 
 	public class UnitFSMConditionParam
@@ -61,8 +63,8 @@ namespace Game
 			//列状态进入行状态,例如第一行第二列是（Float_Free&Ground_Free） null表示没有过度（条件永远不满足）
 			return new UnitFSMConditionParam[,]{ 
 				//Ground_Free   	Float_Free       	Climb_Free
-				{null,    			UFSMCP(0,true),  	null}, //Ground_Free
-				{UFSMCP(0,false),   null,     			null}, //Float_Free
+				{null,    			UFSMCP(1),  	    null}, //Ground_Free
+				{UFSMCP(2),         null,     			null}, //Float_Free
 				{null,   			null, 				null}, //Climb_Free
 			};
 		}

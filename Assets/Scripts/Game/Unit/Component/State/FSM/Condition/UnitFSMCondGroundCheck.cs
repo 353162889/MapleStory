@@ -23,6 +23,7 @@ namespace Game
 			return _isGround == IsGround ();
 		}
 
+        //判断是否落地，前一帧的位置与当前一帧的位置形成的线段与当前高度有交集，并且前一帧的位置是不可行走区域，当前一帧的位置是可行走区域
 		public bool IsGround()
 		{
 			Vector3 pos = this._unit.transform.position;

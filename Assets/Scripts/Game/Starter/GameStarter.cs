@@ -32,7 +32,7 @@ namespace Game
 
 		private void OnPreloadFinish(int notify,object arg)
 		{
-			SceneCO sceneCO = new SceneCO("测试场景", new Vector3(3.026f, 1.56f, 0), "Scene/S_Test/S_Test.prefab", "Scene/S_Test/S_Test_MapData.byte");
+			SceneCO sceneCO = new SceneCO("测试场景", new Vector3(3.026f, 8.56f, 0), "Scene/S_Test/S_Test.prefab", "Scene/S_Test/S_Test_MapData.byte");
 			SceneController.Instance.EnterScene(sceneCO);
 		}
 

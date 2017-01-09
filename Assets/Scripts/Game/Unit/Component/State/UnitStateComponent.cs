@@ -33,7 +33,11 @@ namespace Game
         {
 			this._unit.PropComponent.InitProperty(UnitProperty.State, 0);
 			_stateMachine = new UnitFSMStateMachine (_unit);
-			_stateMachine.InitState (UnitFSMStateName.Float_Free);
+        }
+
+        public void InitState(string stateName)
+        {
+            _stateMachine.InitState(stateName);
         }
 
         public override void Update(float dt)

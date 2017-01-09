@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -29,7 +30,7 @@ namespace Game
 			else if (inputParam.InputType == UnitInputType.Action)
 			{
 				UnitInputParamAction param = (UnitInputParamAction)inputParam;
-				if (param.ActionName == UnitActionBaseDef.Jump)
+				if (param.ActionName == UnitActionBaseDef.Jump && param.Effective)
 				{
 					Jump ();
 				}
@@ -40,19 +41,18 @@ namespace Game
 		{
 			base.OnEnter ();
 			EnableGravity (false);
-			CheckCacheInputInEnter (UnitInputType.Move);
-		}
-
-		protected override void OnExit ()
-		{
-			EnableGravity (false);
-			base.OnExit ();
+            DoAction(UnitActionBaseDef.Stand);
+            CheckCacheInputInEnter (UnitInputType.Move);
 		}
 
 		public override void OnTick (float dt)
 		{
 			base.OnTick (dt);
-			UpdateMapHeight ();
+		    if (Mathf.Abs(_unit.PropComponent.Speed.y) < 0.0001f)
+		    {
+                UpdateMapHeight();
+            }
+			
 		}
 	}
 }
